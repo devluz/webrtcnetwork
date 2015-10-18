@@ -741,10 +741,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 605586980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65b786dd6d37115418e18b6a51783ddf, type: 3}
+  m_Script: {fileID: 11500000, guid: 78301dd62fd8c124898181e3081353ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uEntryPrefab: {fileID: 109896, guid: 5cfd1daa60fdf2947b80e6a447137168, type: 2}
+  uEntryPrefab: {fileID: 109896, guid: ab520a2f47418824e912fe095578ae27, type: 2}
 --- !u!1 &612685006
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,13 +916,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 635629324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd6ad19469f48ce49aa7cd17b7ea0147, type: 3}
+  m_Script: {fileID: 11500000, guid: 04af86a5d1694de4c9fffd3c6df7fc26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uRoomName: {fileID: 1576615085}
   uMessageField: {fileID: 384083812}
   uOutput: {fileID: 605586982}
-  uDisconnectList: {fileID: 0}
   uJoin: {fileID: 1258601080}
   uOpenRoom: {fileID: 583133082}
   uShutdown: {fileID: 1270332315}

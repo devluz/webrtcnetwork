@@ -17,7 +17,7 @@ public class ChatApp : MonoBehaviour
     public InputField uRoomName;
     public InputField uMessageField;
     public MessageList uOutput;
-    public Dropdown uDisconnectList;
+
 
     public Button uJoin;
     public Button uOpenRoom;
