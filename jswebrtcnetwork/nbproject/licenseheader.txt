@@ -1,0 +1,9 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Copyright (C) 2015 Christoph Kutza
+${licensePrefix}
+${licensePrefix}Please refer to the LICENSE file for license information
+<#if licenseLast??>
+${licenseLast}
+</#if>

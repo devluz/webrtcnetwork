@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2015 Christoph Kutza
+
+Please refer to the LICENSE file for license information.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.firebase.com/js/client/2.3.0/firebase.js"></script>
+        <script src="../webrtcnetwork.js"> </script>
+        <script src="../FirebaseSignalingChan.js"> </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script>
+            
+        
+        var server = new FirebaseSignalingChan();
+        var client = new FirebaseSignalingChan();
+        
+        
+        function SRV(lMsgType, lMsg) 
+        {
+            console.debug("Server event" + lMsgType);
+            if(lMsgType === SignalingMessageType.Connected)
+            {
+                
+            }
+            
+        }
+        
+        function CLT(lMsgType, lMsg)
+        {
+            console.debug("Client event" + lMsgType);
+            if(lMsgType === SignalingMessageType.Connected)
+            {
+            }
+        }
+        
+        server.Open("Test567", SRV);
+        
+
+        
+        setTimeout(function()
+        {
+                client.Connect("Test567", CLT);
+        }, 5000);
+        setTimeout(function()
+        {
+                server.Close();
+        }, 7000);
+        
+
+        </script>
+    </body>
+</html>

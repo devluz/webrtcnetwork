@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2015 Christoph Kutza
+
+Please refer to the LICENSE file for license information.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="../JSONConnectorProtocol.js"> </script>
+        <script src="../InterfaceSignalingChan.js"> </script>
+        <script src="../webrtcnetwork.js"> </script>
+        
+        <script src="../LocalSignalingChan.js"> </script>
+        
+	<script src="https://cdn.firebase.com/js/client/2.3.0/firebase.js"></script>
+        <script src="../FirebaseSignalingChan.js"> </script>
+        
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="../SocketIoSignalingChan.js"> </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script>
+            
+            
+            
+            
+            var ConfLocal = 
+                    {
+                        Signaling : 
+                            {
+                                name : "LocalSignalingChan"
+                            }
+                    };
+            var ConfFirebase = 
+                    {
+                        Signaling : 
+                            {
+                                name : 'FirebaseSignalingChan',
+                                conf : 'https://incandescent-inferno-5269.firebaseio.com/webrtcnetwork0_9/'
+                            },
+                        IceConfig : 
+                            {
+                                iceServers : [ {url:'stun:stun.l.google.com:19302'}]
+                            }
+                    };
+            var ConfSocketIo = 
+                    {
+                        Signaling : 
+                            {
+                                name : 'SocketIoSignalingChan',
+                                conf : 'https://4science.azurewebsites.net:443'
+                            },
+                        IceConfig : 
+                            {
+                                iceServers : [ {url:'stun:stun.l.google.com:19302'}]
+                            }
+                    };
+            
+            //change this to try different server configurations
+            var Conf = ConfSocketIo;
+            
+            /**
+             * Sets up a normal client and tries to connect + sends 2 test messages
+             * 
+             */
+            function NormalClient()
+            {
+                var client = new WebRtcNetwork(Conf);
+                client.OnLog = function(lMsg)
+                {
+                    console.debug(lMsg);
+                };
+                client.Connect("test123");
+
+                setInterval(function()
+                {
+                    var evt;
+                    while((evt = client.Dequeue()) != null)
+                    {
+                        console.debug(evt.netEventType + " connection id " + evt.connectionId);
+                        if(evt.netEventType == NetEventType.NewConnection)
+                        {
+                            //client.Shutdown();
+                            var data = new Uint8Array(1);
+                            data[0] = 42;
+                            client.SendData(evt.connectionId, data, true);
+                            data[0] = 43;
+                            client.SendData(evt.connectionId, data, false);
+                        }
+                    }
+                }, 100);
+            }
+            
+            //try to connect
+            NormalClient();
+            
+        </script>
+    </body>
+</html>

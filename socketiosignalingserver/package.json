@@ -1,0 +1,9 @@
+{
+  "name": "socketio-signaling-server",
+  "version": "0.9",
+  "description": "Signaling server for the SocketIoSignalingChan in WebRTCNetwork",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.3.7"
+  }
+}
