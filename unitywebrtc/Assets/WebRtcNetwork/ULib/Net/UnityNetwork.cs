@@ -13,6 +13,18 @@ using UnityEngine;
 namespace Luz.ULib.Net
 {
 #if !UNITY_WEBGL
+    /// <summary>
+    /// This is a helper class for testing only. It implements the same
+    /// IBasicNetwork interface as WebRTCNetwork but works on all
+    /// Unity platforms. 
+    /// You can use this class to test your network in Unity without having
+    /// to build a browser version.
+    /// 
+    /// This class will be replaced by a C++ WebRTC library in the future, until
+    /// then you won't be able to connect to browsers from the editor!
+    /// 
+    /// This class isn't very well designed and uses the old deprecated unity network.
+    /// </summary>
     public class UnityNetwork : MonoBehaviour, IBasicNetwork
     {
         private float mDebugTimeout = 5;

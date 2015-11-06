@@ -12,7 +12,7 @@ using UnityEngine;
 namespace Luz.ULib.Net
 {
 
-    internal class ByteArrayBuffer : MessageDataBuffer
+    public class ByteArrayBuffer : MessageDataBuffer
     {
         internal byte[] array;
         internal int positionWrite;

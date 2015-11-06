@@ -9,10 +9,15 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+
 namespace Luz.ULib.Net
 {
     
 #if !UNITY_WEBGL
+
+    /// <summary>
+    /// For internal use only.
+    /// </summary>
     public class SingleEndpointConnection : MonoBehaviour
     {
         private NetworkView receiver;

@@ -18,12 +18,12 @@ namespace Luz.ULib.Net
         Invalid = 0,
         UnreliableMessageReceived = 1,
         ReliableMessageReceived = 2,
-        ServerInitialized = 3,
-        ServerInitFailed = 4,
-        ServerClosed = 5,
-        NewConnection = 6,
-        ConnectionFailed = 7,
-        Disconnected = 8,
+        ServerInitialized = 3,//confirmation that the server was started. other people will be able to connect
+        ServerInitFailed = 4,//server couldn't be started
+        ServerClosed = 5,//server was closed. no new incomming connections
+        NewConnection = 6,//new incomming or outgoing connection etablished
+        ConnectionFailed = 7,//outgoing connection failed
+        Disconnected = 8,//a connection was disconnected
         FatalError = 100, //not yet used
         Warning = 101,//not yet used
         Log = 102 //not yet used
@@ -31,6 +31,18 @@ namespace Luz.ULib.Net
 
     /// <summary>
     /// Contains information about events received by the network.
+    /// 
+    /// The type of the network event decides the content it can contain.
+    /// 
+    /// Most important are:
+    /// 
+    /// UnreliableMessageReceived / ReliableMessageReceived:
+    /// A new message was received. The property MessageData will return
+    /// a buffer + byte array containing the data received.
+    /// 
+    /// ServerInitialized:
+    /// A call to StartServer was successful. The Info property will return the address
+    /// the server can be accessed by.
     /// 
     /// 
     /// </summary>
@@ -64,6 +76,15 @@ namespace Luz.ULib.Net
 
 
         private object data;
+
+        /// <summary>
+        /// Returns an object belonging to the event.
+        /// This can be a MessageDataBuffer containing a byte array or a string.
+        /// </summary>
+        public object RawData
+        {
+            get { return data; }
+        }
         /// <summary>
         /// Returns the content of the messages if the event type is
         /// UnreliableMessageReceived or ReliableMessageReceived.
@@ -90,12 +111,28 @@ namespace Luz.ULib.Net
             }
         }
 
+        /// <summary>
+        /// Creates a new network event of a certain type setting 
+        /// connection id to invalid and data to null.
+        /// 
+        /// Internal only. Do not use.
+        /// </summary>
+        /// <param name="t">The type of this event</param>
         internal NetworkEvent(NetEventType t)
         {
             type = t;
             connectionId = ConnectionId.INVALID;
             data = null;
         }
+
+        /// <summary>
+        /// Creates a network event with the given content
+        /// 
+        /// Internal only. Do not use.
+        /// </summary>
+        /// <param name="t">Typename</param>
+        /// <param name="conId">ConnectionId the event is from / relates to</param>
+        /// <param name="dt">Data. String or MessageDataBuffer</param>
         internal NetworkEvent(NetEventType t, ConnectionId conId, object dt)
         {
             type = t;
@@ -103,7 +140,10 @@ namespace Luz.ULib.Net
             data = dt;
         }
 
-
+        /// <summary>
+        /// Converts the event to string. Use for debugging only.
+        /// </summary>
+        /// <returns>A string representation of the network event.</returns>
         public override string ToString()
         {
             StringBuilder datastring = new StringBuilder();

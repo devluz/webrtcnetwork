@@ -9,35 +9,12 @@ using System.Collections.Generic;
 namespace Luz.ULib.Net
 {
     /// <summary>
-    /// Shared interface for WebRtcNetwork and UnityNetwork.
+    /// Interface to a network that doesn't enforce storing any states.
     /// 
-    /// Keep in mind that in the current version the network can be only act as a server or 
-    /// as a client.
+    /// Anything more is reusable between multiple different networks.
     /// </summary>
-    public interface IBasicNetwork
+    public interface INetwork
     {
-        /// <summary>
-        /// List of all known connections
-        /// </summary>
-        IList<ConnectionId> Connections { get; }
-
-        /// <summary>
-        /// True if the system either runs in server mode or in client mode and is connected to a server.
-        /// </summary>
-        bool IsRunning { get; }
-
-        /// <summary>
-        /// True if the network runs in server mode and allows incomming connections.
-        /// </summary>
-        bool IsServer { get; }
-
-        /// <summary>
-        /// Connects to a given address or roomname
-        /// </summary>
-        /// <param name="address">A string that idendifies the target.</param>
-        /// <returns>Returns the Connection id the etablished connection will have (only supported by WebRtcNetwork).</returns>
-        ConnectionId Connect(string address);
-
         /// <summary>
         /// This will return the incomming network events. Call this method and handle the incommen events until it returns false.
         /// </summary>
@@ -46,7 +23,7 @@ namespace Luz.ULib.Net
         bool Dequeue(out NetworkEvent evt);
 
         /// <summary>
-        /// Sends buffered data. Call this at the end of every frame (or logic step)
+        /// Sends buffered data.
         /// </summary>
         void Flush();
 
@@ -74,15 +51,56 @@ namespace Luz.ULib.Net
         void Shutdown();
 
         /// <summary>
-        /// Starts a new server. After the server is started the Dequeue method will return a
-        /// ServerInitialized event with the address in the Info field.
-        /// </summary>
-        void StartServer();
-
-        /// <summary>
         /// Call this every frame if you intend to read incomming messages using Dequeue. This will make
         /// sure all data is read received by the network.
         /// </summary>
         void Update();
+    }
+    /// <summary>
+    /// Shared interface for WebRtcNetwork and UnityNetwork.
+    /// 
+    /// Keep in mind that in the current version the network can only act as a server (StartServer method) or 
+    /// as a client (via Connect method).
+    /// </summary>
+    public interface IBasicNetwork : INetwork
+    {
+        /// <summary>
+        /// List of all known connections
+        /// </summary>
+        IList<ConnectionId> Connections { get; }
+
+        /// <summary>
+        /// True if the system either runs in server mode or in client mode and is connected to a server.
+        /// </summary>
+        bool IsRunning { get; }
+
+        /// <summary>
+        /// True if the network runs in server mode and allows incomming connections.
+        /// </summary>
+        bool IsServer { get; }
+
+        /// <summary>
+        /// Starts a new server. After the server is started the Dequeue method will return a
+        /// ServerInitialized event with the address in the Info field.
+        /// 
+        /// If the server fails to start it will return a ServerInitFailed event. If the
+        /// server is closed due to an error or the Shutdown method a ServerClosed event
+        /// will be triggered.
+        /// </summary>
+        void StartServer();
+
+
+        /// <summary>
+        /// Connects to a given address or roomname.
+        /// 
+        /// This call will result in one of those 2 events in response:
+        /// * NewConnection if the connection was etablished
+        /// * ConnectionFailed if the connection failed.
+        /// 
+        /// 
+        /// </summary>
+        /// <param name="address">A string that idendifies the target.</param>
+        /// <returns>Returns the Connection id the etablished connection will have (only supported by WebRtcNetwork).</returns>
+        ConnectionId Connect(string address);
     }
 }

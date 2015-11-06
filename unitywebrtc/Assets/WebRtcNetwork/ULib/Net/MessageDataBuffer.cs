@@ -10,25 +10,22 @@ using System.Text;
 
 namespace Luz.ULib.Net
 {
-
-    /** This interface is used to return message data.
-     * 
-     * Use MessageDataBuffer.Buffer only to read data between
-     * the index 0 and MessageDataBuffer.ContentLength.
-     * 
-     * After reading use Dispose to allow the network to
-     * reuse this buffer and spare the Garbage Collector
-     * the work.
-     * 
-     * Make sure not to keep any references to
-     * MessageDataBuffer.Buffer after calling Dispose!
-     * 
-     * If you need to store the byte array creata a copy
-     * of the content before using Dispose.
-     * 
-     * 
-     * 
-     */
+    /// <summary>
+    /// 
+    /// This interface is used to return message data.
+    ///
+    /// Use MessageDataBuffer.Buffer only to read data between
+    /// the index 0 and MessageDataBuffer.ContentLength.
+    /// 
+    /// After reading use Dispose to allow the network to
+    /// reuse this buffer and spare the Garbage Collector
+    /// the work.
+    /// 
+    /// Make sure not to keep any references to
+    /// MessageDataBuffer.Buffer after calling Dispose!
+    /// If you need to store the byte array creata a copy
+    /// of the content before using Dispose.
+    /// </summary>
     public interface MessageDataBuffer : IDisposable
     {
         /// <summary>
@@ -43,6 +40,8 @@ namespace Luz.ULib.Net
 
         /// <summary>
         /// Returns the length of the buffers content.
+        /// The byte array might be longer than the actual content!
+        /// Always use this property not Buffer.Length !!!
         /// </summary>
         int ContentLength
         {
