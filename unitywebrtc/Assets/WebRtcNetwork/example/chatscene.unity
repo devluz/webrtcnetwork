@@ -403,7 +403,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 384083813}
   m_TextComponent: {fileID: 815035493}
   m_Placeholder: {fileID: 99608507}
@@ -923,6 +923,7 @@ MonoBehaviour:
   uMessageField: {fileID: 384083812}
   uOutput: {fileID: 605586982}
   uJoin: {fileID: 1258601080}
+  uSend: {fileID: 2014950065}
   uOpenRoom: {fileID: 583133082}
   uShutdown: {fileID: 1270332315}
 --- !u!1 &678471667
@@ -1177,7 +1178,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1186548418}
   m_HandleRect: {fileID: 1186548417}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1439,7 +1440,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1909284983}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2433,7 +2434,7 @@ GameObject:
   - 114: {fileID: 2014950066}
   - 114: {fileID: 2014950065}
   m_Layer: 5
-  m_Name: Button
+  m_Name: SendButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2491,7 +2492,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2014950066}
   m_OnClick:
     m_PersistentCalls:

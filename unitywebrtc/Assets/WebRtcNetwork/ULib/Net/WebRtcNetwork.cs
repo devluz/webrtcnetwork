@@ -121,6 +121,10 @@ document.head.appendChild(socketioscript);
 
 
         private int mReference = -1;
+
+        /// <summary>
+        /// Returns true if the server is running or the client is connected.
+        /// </summary>
         public bool IsRunning
         {
             get
@@ -135,6 +139,9 @@ document.head.appendChild(socketioscript);
         }
 
         private bool mIsServer = false;
+        /// <summary>
+        /// True if the server is running allowing incomming connections
+        /// </summary>
         public bool IsServer
         {
             get { return mIsServer; }

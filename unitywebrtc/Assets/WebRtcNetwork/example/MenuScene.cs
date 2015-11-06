@@ -7,10 +7,13 @@ using UnityEngine;
 using System.Collections;
 using Luz.ULib.Tools;
 
+/// <summary>
+/// Simple script to draw the debug console and wait for ui events.
+/// </summary>
 public class MenuScene : MonoBehaviour {
 
-	// Use this for initialization
-	void Start ()
+
+    private void Start()
     {
         DebugHelper.ActivateConsole();
         Debug.Log("Started ...");

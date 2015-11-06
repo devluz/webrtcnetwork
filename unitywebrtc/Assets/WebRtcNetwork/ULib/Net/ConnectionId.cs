@@ -18,8 +18,17 @@ namespace Luz.ULib.Net
     [Serializable]
     public struct ConnectionId
     {
+
+        /// <summary>
+        /// ConnectionId 
+        /// </summary>
         public static readonly ConnectionId INVALID = new ConnectionId() { id = -1 };
+
+        /// <summary>
+        /// Stores the id as a short.
+        /// </summary>
         public short id;
+
 
         public override bool Equals(object obj)
         {

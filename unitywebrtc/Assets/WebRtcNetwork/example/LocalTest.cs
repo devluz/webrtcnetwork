@@ -10,8 +10,12 @@ using Luz.ULib.Net;
 using System.Text;
 
 /// <summary>
+/// Contains a test scenario. You can run this via the menuscene.scene file.
+/// Only works in a WebGL build!
+/// 
 /// Local test will start one WebRtcNetwork as an echo server and one as a client.
-/// It will connect, send a reliable/ unreliable message and then disconnect again.
+/// It will then connect, send a reliable/ unreliable message, test if those messages
+/// are received on the other and then disconnect again.
 ///
 /// Should end with ------------All tests successful!------------- in the debug console
 /// </summary>
@@ -34,6 +38,11 @@ public class LocalTest : MonoBehaviour
         UnreliableMessage,
         TestSuccessful
     }
+
+    /// <summary>
+    /// State of the test.
+    /// 
+    /// </summary>
     private State mState = State.Uninitialized;
 
     /// <summary>
@@ -56,7 +65,8 @@ public class LocalTest : MonoBehaviour
         yield return new WaitForSeconds(1);
         StartTest();
     }
-    public void StartTest()
+
+    private void StartTest()
     {
 
         if (WebRtcNetwork.IsAvailable() == false)
@@ -76,7 +86,7 @@ public class LocalTest : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         
         if(mServer != null)
