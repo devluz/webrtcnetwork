@@ -14,7 +14,7 @@ using UnityEngine;
 namespace Luz.Net
 {
     /// <summary>
-    /// Uses an underlaying java script library to give network access in browswers.
+    /// Uses an underlaying java script library to give network access in browsers.
     /// 
     /// Use WebRtcNetwork.IsAvailable() first to check if it can run. If the java script part of the library
     /// is included + the browser supports WebRtc it should return true. If the java script part of the
@@ -28,6 +28,8 @@ namespace Luz.Net
     /// </summary>
     public class WebRtcNetwork : IBasicNetwork
     {
+
+        //these are functions implemented in the java script plugin file WebRtcNetwork.jslib
         #region CAPI imports
         [DllImport("__Internal")]
         private static extern bool UnityWebRtcNetworkIsAvailable();
