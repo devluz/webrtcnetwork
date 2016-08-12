@@ -1,3 +1,9 @@
+Note: This is the old java script version of WebRtcNetwork. It is now under the MIT license so you can use it 
+any way you want!
+
+The Unity Asset WebRtcNetwork switched to a complete new rewritten type script library.
+(will be published on github in the future)
+
 # WebRTCNetwork
 A simple and well defined API to access WebRTC DataChannels from Unity or Emscripten
 
